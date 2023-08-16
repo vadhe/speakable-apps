@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@heroicons/react': ^2.0.18
   '@nx/eslint-plugin': 16.7.0
   '@nx/jest': 16.7.0
   '@nx/js': 16.7.0
@@ -62,6 +63,7 @@ specifiers:
   vitest: ~0.32.0
 
 dependencies:
+  '@heroicons/react': 2.0.18_react@18.2.0
   '@nx/next': 16.7.0_pkf6mgyobc7dgyj74rvjh4d7r4
   '@swc/helpers': 0.5.1
   next: 13.4.1_w4exofnty45araakomg6jes2wu
@@ -1862,6 +1864,14 @@ packages:
     dependencies:
       '@hapi/hoek': 9.3.0
     dev: true
+
+  /@heroicons/react/2.0.18_react@18.2.0:
+    resolution: {integrity: sha512-7TyMjRrZZMBPa+/5Y8lN0iyvUU/01PeMGX2+RE7cQWpEUIcb4QotzUObFkJDejj/HUH4qjP/eQ0gzzKs2f+6Yw==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@humanwhocodes/config-array/0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}

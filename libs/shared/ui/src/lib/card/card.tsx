@@ -1,11 +1,17 @@
 import React from 'react';
+import { VariableIcon } from '@heroicons/react/24/solid'
 
 /* eslint-disable-next-line */
-export interface CardProps {}
+export interface CardProps {
+  text: string
+}
 
-export function Card(props: CardProps) {
+export function Card({text}: CardProps) {
   return (
-      <h1 className='text-red-800'>Welcome to Card!</h1>
+    <div className='bg-secondary rounded p-4  flex justify-start w-full  text-tertiary items-start'>
+    <VariableIcon className="h-7 w-7 mr-4 flex-shrink-0" />
+     <p className='flex-grow break-all'>{text}</p>
+    </div>
   );
 }
 
