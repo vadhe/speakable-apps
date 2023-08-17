@@ -15,7 +15,11 @@ module.exports = {
       colors: {
         primary: '#3e374d',
         secondary: '#dd477e',
-        tertiary :'#e2e8f0'
+        tertiary :'#e2e8f0',
+        black: '#201831'
+      },
+      width: {
+        30: '30%'
       },
       fontFamily: {
         'monoton': ['Monoton', 'cursive'],
