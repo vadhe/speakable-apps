@@ -1,25 +1,46 @@
 'use client';
 
-import { useWordStore } from '@speakable-apps/shared/store';
-import { Search, Card } from '@speakable-apps/shared/ui';
+import { Search, Card, Button } from '@speakable-apps/shared/ui';
 import { useState } from 'react';
-const DUMMYWORDS = [
-  {
-    definition: {
-      en: 'infml to go to bed in order to sleep',
-      id: 'Idiom ini artinya tidur dan biasanya ini menandakan bahwa kita sangat lelah dan ingin segera beristirahat'
-    },
-    example: {
-      en: 'I’m so tired, I think I’m going to hit the sack',
-      id: 'Saya sangat lelah, saya pikir saya akan tidur'
-    },
-    word: 'HIT THE SACK',
-  },
-];
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://dpbhbkctsaezcwkuolbv.supabase.co';
+const supabaseKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRwYmhia2N0c2FlemN3a3VvbGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTIxODgxMzEsImV4cCI6MjAwNzc2NDEzMX0.ekz4bQW1pnV0TBcMWtD2yi8cpe-Loye6WMZLota5lSw';
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+interface Word {
+  word: string;
+  definition_en: string;
+  example_en: string;
+  definition_id: string;
+  example_id: string;
+}
 
 export default function Home() {
   const [search, setSearch] = useState('');
-  const { word, setWord } = useWordStore();
+  const [data, setData] = useState<Word[]>([]);
+  const [isEmpaty, setIsempaty] = useState(false);
+  const [loading, setLoadind] = useState(false);
+  const fetchData = async () => {
+    setLoadind(true);
+    const { data, error } = await supabase
+      .from('words')
+      .select('*')
+      .filter('word', 'ilike', `%${search}%`);
+    if (error) {
+      console.error('Error fetching data:', error);
+    } else {
+      setLoadind(false);
+      if (!data.length) {
+        setIsempaty(true);
+        console.log('no result');
+      }
+      setData(data);
+    }
+  };
+
   return (
     <div>
       <div className="bg-black h-screen text-tertiary  lg:w-30 mx-auto mt-8 rounded-lg p-2">
@@ -31,17 +52,27 @@ export default function Home() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        {word ? (
+        <Button onClick={fetchData}>{loading ? 'Loading...' : ' Cari'}</Button>
+        {data.length ? (
           <>
-            <p className="my-6 text-center w-full break-all">{search}</p>
+            <p className="my-6 text-center w-full break-all">{data[0].word}</p>
             <div className="my-6">
-              <Card title='Definition (Definisi)' textEn={DUMMYWORDS[0].definition.en} textId={DUMMYWORDS[0].definition.id} />
+              <Card
+                title="Definition (Definisi)"
+                textEn={data[0].definition_en}
+                textId={data[0].definition_id}
+              />
             </div>
-            <Card title='Example (contoh)' textEn={DUMMYWORDS[0].example.en} textId={DUMMYWORDS[0].example.id} />
+            <Card
+              title="Example (contoh)"
+              textEn={data[0].example_en}
+              textId={data[0].example_id}
+            />
           </>
-        ) : (
-          <p>selamat datang</p>
-        )}
+        ) : null}
+        {isEmpaty ? (
+          <p className="text-center mt-6">kata yang anda cari belum tersedia</p>
+        ) : null}
       </div>
     </div>
   );
