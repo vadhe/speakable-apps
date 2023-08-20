@@ -3,6 +3,7 @@
 import { Search, Card, Button } from '@speakable-apps/shared/ui';
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import Link from 'next/link';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_API_SUPABASE_URL || '';
 const supabaseKey = process.env.NEXT_PUBLIC_API_SUPABASE_KEY || '';
@@ -21,6 +22,7 @@ export default function Home() {
   const [data, setData] = useState<Word[]>([]);
   const [isEmpaty, setIsempaty] = useState(false);
   const [loading, setLoadind] = useState(false);
+  const [isHome, setIsHome] = useState(true);
   const fetchData = async () => {
     setLoadind(true);
     const { data, error } = await supabase
@@ -69,7 +71,30 @@ export default function Home() {
           </>
         ) : null}
         {isEmpaty ? (
-          <p className="text-center mt-6">kata yang anda cari belum tersedia</p>
+          <p className="text-center mt-6">
+            Kata yang Anda cari belum tersedia atau coba masukkan kata lain.
+          </p>
+        ) : null}
+        {isHome && !data.length &&  !isEmpaty ? (
+          <>
+            <h3 className="font-extrabold text-2xl text-center my-6">
+              Selamat datang di Speakable Apps!
+            </h3>
+            <p className="text-center my-6">
+              Temukan berbagai idiom dalam bahasa Inggris melalui platform
+              pencarian kami.
+            </p>
+            <h4 className="text-center text-1xl mt-16">JOsIN THE COMMUNITY</h4>
+            <Link href="https://discord.gg/mgyxqTAW" target="_blank">
+              <Button>Discord</Button>
+            </Link>
+            <Link
+              href="https://www.instagram.com/speakable.youth/"
+              target="_blank"
+            >
+              <Button>Instagram</Button>
+            </Link>
+          </>
         ) : null}
       </div>
     </div>

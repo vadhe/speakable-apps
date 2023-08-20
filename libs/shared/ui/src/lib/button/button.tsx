@@ -2,7 +2,7 @@ import { MouseEvent, ReactNode } from 'react';
 
 export interface ButtonProps {
   children?: ReactNode;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export function Button({ onClick, children }: ButtonProps) {
