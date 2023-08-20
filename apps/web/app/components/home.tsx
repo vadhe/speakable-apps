@@ -84,7 +84,7 @@ export default function Home() {
               Temukan berbagai idiom dalam bahasa Inggris melalui platform
               pencarian kami.
             </p>
-            <h4 className="text-center text-1xl mt-16">JOsIN THE COMMUNITY</h4>
+            <h4 className="text-center text-1xl mt-16">JOIN THE COMMUNITY</h4>
             <Link href="https://discord.gg/mgyxqTAW" target="_blank">
               <Button>Discord</Button>
             </Link>
