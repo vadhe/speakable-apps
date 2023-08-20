@@ -4,10 +4,8 @@ import { Search, Card, Button } from '@speakable-apps/shared/ui';
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://dpbhbkctsaezcwkuolbv.supabase.co';
-const supabaseKey =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRwYmhia2N0c2FlemN3a3VvbGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTIxODgxMzEsImV4cCI6MjAwNzc2NDEzMX0.ekz4bQW1pnV0TBcMWtD2yi8cpe-Loye6WMZLota5lSw';
-
+const supabaseUrl = process.env.NEXT_PUBLIC_API_SUPABASE_URL || '';
+const supabaseKey = process.env.NEXT_PUBLIC_API_SUPABASE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 interface Word {
