@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@speakable-apps/shared/store": ["libs/shared/store/src/index.ts"],
+      "@speakable-apps/shared/supabase": ["libs/shared/supabase/src/index.ts"],
       "@speakable-apps/shared/ui": ["libs/shared/ui/src/index.ts"]
     }
   },

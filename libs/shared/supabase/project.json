@@ -1,0 +1,37 @@
+{
+  "name": "shared-supabase",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/supabase/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/supabase",
+        "main": "libs/shared/supabase/src/index.ts",
+        "tsConfig": "libs/shared/supabase/tsconfig.lib.json",
+        "assets": ["libs/shared/supabase/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/supabase/**/*.ts",
+          "libs/shared/supabase/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/libs/shared/supabase"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../coverage/libs/shared/supabase"
+      }
+    }
+  },
+  "tags": []
+}

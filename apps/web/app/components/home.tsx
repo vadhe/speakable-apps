@@ -2,12 +2,8 @@
 
 import { Search, Card, Button } from '@speakable-apps/shared/ui';
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_API_SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_API_SUPABASE_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabaseClient } from '@speakable-apps/shared/supabase';
 
 interface Word {
   word: string;
@@ -25,7 +21,7 @@ export default function Home() {
   const [isHome, setIsHome] = useState(true);
   const fetchData = async () => {
     setLoadind(true);
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from('words')
       .select('*')
       .filter('word', 'ilike', `%${search}%`);
